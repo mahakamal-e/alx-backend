@@ -72,7 +72,7 @@ class Server:
         page_size (int): The number of items per page.
 
         Returns:
-        Dict[str, Optional[int]]: A dictionary containing pagination information.
+        Dict[]: A dictionary containing pagination information.
         """
         dataset = self.dataset()
         total_items = len(dataset)
