@@ -2,10 +2,10 @@
 """ Define index_range function. """
 import csv
 import math
-from typing import List
+from typing import List, Tuple
 
 
-def index_range(page: int, page_size: int) -> tuple:
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     Calculate the start and end index for pagination.
 
@@ -42,23 +42,23 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-    """
-    Retrieve a page of data from the dataset.
+        """
+        Retrieve a page of data from the dataset.
 
-    Args:
-    page (int): The current page number (1-indexed).
-    page_size (int): The number of items per page.
+        Args:
+        page (int): The current page number (1-indexed).
+        page_size (int): The number of items per page.
 
-    Returns:
-    List[List]: The list of rows corresponding to the current page.
-    """
-    assert (type(page) == int and page > 0)
-    assert (type(page_size) == int and page_size > 0)
+        Returns:
+        List[List[str]]: The list of rows corresponding to the current page.
+        """
+        assert (type(page) == int and page > 0)
+        assert (type(page_size) == int and page_size > 0)
 
-    start_index, end_index = index_range(page, page_size)
-    dataset = self.dataset()
+        start_index, end_index = index_range(page, page_size)
+        dataset = self.dataset()
 
-    if start_index >= len(dataset):
-        return []
+        if start_index >= len(dataset):
+            return []
 
-    return dataset[start_index:end_index]
+        return dataset[start_index:end_index]
