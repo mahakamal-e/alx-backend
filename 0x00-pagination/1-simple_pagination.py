@@ -52,13 +52,13 @@ class Server:
     Returns:
     List[List]: The list of rows corresponding to the current page.
     """
-    assert isinstance(page, int) and page > 0
-    assert isinstance(page_size, int) and page_size > 0
+    assert (type(page) == int and page > 0)
+    assert (type(page_size) == int and page_size > 0)
 
-    dataset = self.dataset()
     start_index, end_index = index_range(page, page_size)
+    dataset = self.dataset()
 
-    # Return the appropriate slice of the dataset
     if start_index >= len(dataset):
         return []
+
     return dataset[start_index:end_index]
