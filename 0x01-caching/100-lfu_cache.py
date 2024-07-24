@@ -44,7 +44,7 @@ class LFUCache(BaseCaching):
                 if not self.order[self.min_freq]:
                     del self.order[self.min_freq]
                     self.min_freq += 1
-            
+ 
             self.cache_data[key] = item
             self.frequency[key] = 1
             if 1 not in self.order:
@@ -57,14 +57,14 @@ class LFUCache(BaseCaching):
         """
         if key is None or key not in self.cache_data:
             return None
-        
+
         self.frequency[key] += 1
         freq = self.frequency[key]
         self.order[freq - 1].remove(key)
         if freq not in self.order:
             self.order[freq] = []
         self.order[freq].append(key)
-        
+
         if not self.order[self.min_freq]:
             del self.order[self.min_freq]
             self.min_freq += 1
