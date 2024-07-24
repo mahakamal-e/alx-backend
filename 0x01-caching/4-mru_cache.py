@@ -2,6 +2,7 @@
 """ MRUCache module"""
 from base_caching import BaseCaching
 
+
 class MRUCache(BaseCaching):
     """ Creates MRUCache class inherits from BaseCaching"""
 
