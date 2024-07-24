@@ -6,7 +6,7 @@ and is a caching system
 from base_caching import BaseCaching
 
 
-class BaseCaching(BaseCaching):
+class BasicCache(BaseCaching):
     """ Implement Class BaseCaching """
     def __init__(self):
         """initialize new object"""
