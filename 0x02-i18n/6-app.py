@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
-""" Define Flask-Babel Module """
+"""Define Flask-Babel Module"""
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 
 
 class Config:
-    """ Configration class """
+    """Configuration class"""
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = ["UTC"]
+    BABEL_DEFAULT_TIMEZONE = "UTC"
+
 
 app = Flask(__name__)
 babel = Babel(app)
 app.config.from_object(Config)
+
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -24,17 +26,16 @@ users = {
 
 @babel.localeselector
 def get_locale():
-    """ Select language based on user prefrences """
+    """Select language based on user preferences"""
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
         return locale
     if g.user and g.user.get('locale') in app.config['LANGUAGES']:
         return g.user.get('locale')
-
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 def get_user():
-    """ Returns a use dictionary or None"""
+    """Returns a user dictionary or None"""
     user_id = request.args.get('login_as')
     if user_id and user_id.isdigit():
         return users.get(int(user_id))
@@ -42,12 +43,12 @@ def get_user():
 
 @app.before_request
 def before_request():
-    """ Set user before each request """
+    """Set user before each request"""
     g.user = get_user()
 
 @app.route('/')
 def index() -> str:
-    """ render index.html """
+    """Render index.html"""
     username = g.user.get('name') if g.user else None
     return render_template('6-index.html', username=username)
 
