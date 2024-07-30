@@ -21,7 +21,7 @@ def get_locale():
     """ Select language based on user prefrences """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def index() -> str:
     """ render index.html """
     return render_template('2-index.html')
