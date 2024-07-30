@@ -20,7 +20,7 @@ msgstr ""
 
 #: templates/3-index.html:5 templates/5-index.html:5
 msgid "home_title"
-msgstr "Home Page"
+msgstr "Welcome to Holberton"
 
 #: templates/5-index.html:8
 msgid "logged_in_as"
@@ -32,4 +32,4 @@ msgstr "You are not logged in."
 
 #: templates/3-index.html:8 templates/5-index.html:8
 msgid "home_head"
-msgstr "Hello, World!"
+msgstr "Hello world!"

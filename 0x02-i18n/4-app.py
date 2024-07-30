@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Defines flask app"""
-
+"""Define babel-flask module """
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
@@ -19,15 +18,15 @@ app.config.from_object(Config)
 
 @babel.localeselector
 def get_locale():
-    """Function to get the locale"""
-    locale_param = request.args.get('locale')
-    if locale_param and locale_param in app.config['LANGUAGES']:
-        return locale_param
+    """ Returns the locale arg"""
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        return locale
 
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def index() -> str:
     """Render 4-index.html"""
     return render_template('4-index.html')
