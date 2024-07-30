@@ -3,6 +3,7 @@
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 import pytz
+from datetime import datetime
 
 
 class Config:
@@ -38,17 +39,21 @@ def get_locale():
 
 @babel.timezoneselector
 def get_timezone():
-    """ find timezone """
+    """Find timezone based on preferences and defaults"""
     timezone = request.args.get('timezone')
     if timezone:
         try:
             return pytz.timezone(timezone).zone
         except pytz.UnknownTimeZoneError:
-            return app.config['BABEL_DEFAULT_TIMEZONE']
-    
-    user_timezone = g.user.get("timezone")
-    if user_timezone:
-        return user_timezone
+            pass  # fallback to default timezone if an unknown timezone is provided
+
+    if g.user and g.user.get("timezone"):
+        user_timezone = g.user.get("timezone")
+        try:
+            return pytz.timezone(user_timezone).zone
+        except pytz.UnknownTimeZoneError:
+            pass  # fallback to default timezone if an unknown timezone is provided
+
     return app.config['BABEL_DEFAULT_TIMEZONE']
 
 
@@ -70,7 +75,13 @@ def before_request():
 def index() -> str:
     """Render index.html"""
     username = g.user.get('name') if g.user else None
-    return render_template('7-index.html', username=username)
+    timezone = get_timezone()
+    obj = pytz.timezone(timezone)
+    current_time = datetime.now(obj).strftime("%b %d, %Y, %I:%M:%S %p")
+
+    return render_template('index.html',
+                           username=username,
+                           current_time=current_time)
 
 
 if __name__ == "__main__":

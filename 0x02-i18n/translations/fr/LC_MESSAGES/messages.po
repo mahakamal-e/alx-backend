@@ -33,3 +33,6 @@ msgstr "Vous n'êtes pas connecté."
 #: templates/3-index.html:8
 msgid "home_header"
 msgstr "Bonjour monde!"
+
+msgid "current_time_is"
+msgstr "Nous sommes le %(current_time)s."
