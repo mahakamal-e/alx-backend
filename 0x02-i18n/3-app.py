@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ Define Flask-Babel Module """
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
@@ -22,7 +22,7 @@ def get_locale():
 @app.route('/')
 def index() -> str:
     """ render index.html """
-    return render_template('2-index.html')
+    return render_template('3-index.html')
 
 
 if __name__ == "__main__":
