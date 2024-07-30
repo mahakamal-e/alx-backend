@@ -34,6 +34,7 @@ def get_locale():
         return g.user.get('locale')
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 def get_user():
     """Returns a user dictionary or None"""
     user_id = request.args.get('login_as')
@@ -41,10 +42,12 @@ def get_user():
         return users.get(int(user_id))
     return None
 
+
 @app.before_request
 def before_request():
     """Set user before each request"""
     g.user = get_user()
+
 
 @app.route('/')
 def index() -> str:
