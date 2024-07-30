@@ -10,6 +10,7 @@ class Config:
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = ["UTC"]
 
+
 app = Flask(__name__)
 babel = Babel(app)
 app.config.from_object(Config)
@@ -30,6 +31,7 @@ def get_locale():
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 def get_user():
     """ Returns a use dictionary or None"""
     user_id = request.args.get('login_as')
@@ -37,10 +39,12 @@ def get_user():
         return users.get(int(user_id))
     return None
 
+
 @app.before_request
 def before_request():
     """ Set user before each request """
     g.user = get_user()
+
 
 @app.route('/')
 def index() -> str:
