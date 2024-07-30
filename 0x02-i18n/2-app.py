@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-""" Define Flask-Babel Module """
+"""Defines flask app"""
+
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
 class Config:
-    """ Configration class """
+    """Configuration class"""
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -18,12 +19,13 @@ app.config.from_object(Config)
 
 @babel.localeselector
 def get_locale():
-    """ Select language based on user prefrences """
+    """Function to get the locale"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 @app.route('/', strict_slashes=False)
 def index() -> str:
-    """ render index.html """
+    """Render 1-index.html"""
     return render_template('2-index.html')
 
 
