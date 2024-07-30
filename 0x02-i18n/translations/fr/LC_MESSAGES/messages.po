@@ -31,5 +31,5 @@ msgid "not_logged_in"
 msgstr "Vous n'êtes pas connecté."
 
 #: templates/3-index.html:8
-msgid "home_head"
+msgid "home_header"
 msgstr "Bonjour monde!"
